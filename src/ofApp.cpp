@@ -1,11 +1,49 @@
 #include "ofApp.h"
+#include <random>
 
 //--------------------------------------------------------------
-void ofApp::setup(){
+void ofApp::setup()
+{
+
 jewel.load("diamond.png");// image to use (must be stored in "random/bin/data" folder)
-X = {500, 1000, 30, 100, 300, 200, 750, 380 };// set of x-coordinates for jewel
-Y = {630, 400, 900,40, 200, 0, 90, 30}; //set of y-coordinates for jewel
-}
+
+    std::random_device rd; // will be used to seed the engine eng1 below
+    std::mt19937 eng1(1337); // this engine produces different ouput every time
+    std::mt19937 eng2(rd());// this engine  produces the same output every time
+
+    float meanx = 1000.0f; // average
+    float meany = 800.0f; // average
+    float sd = 100.0f; // standard deviation
+
+    int minx = 0; // minimum number to generate
+    int maxx = 1200; // maximum number to generate
+
+    int miny = 0; // minimum number to generate
+    int maxy = 970; // maximum number to generate
+
+    // values near the mean are the most likely
+    // standard deviation affects the dispersion of generated values from the mean
+    std::normal_distribution<float> normx(meanx,sd);
+    std::normal_distribution<float> normy(meany,sd);
+    std::uniform_int_distribution<> unifrmx(minx, maxx);
+    std::uniform_int_distribution<> unifrmy(miny, maxy);
+
+  //generate 20 normally distributed floats  
+  for(int n=0 ;  n < 20 ;  n++) 
+   {
+     X.push_back(normx(eng1));// set of x-coordinates for jewel
+     Y.push_back(normy(eng1));//set of y-coordinates for jewel
+    //cout<<norm(eng1)<<" "; // different output each time
+    }
+
+  //generate 20 uniformly distributed integers 
+  //for(int n=0 ;  n < 20 ; n++) 
+  //{
+        
+     //X.push_back(unifrmx(eng2));// set of x-coordinates for jewel
+     //Y.push_back(unifrmy(eng2));//set of y-coordinates for jewel
+    //cout<<unifrm(eng2)<<" ";// same output each time
+  //}
 
 //--------------------------------------------------------------
 void ofApp::update(){
