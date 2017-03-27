@@ -29,7 +29,7 @@ jewel.load("diamond.png");// image to use (must be stored in "random/bin/data" f
     std::uniform_int_distribution<> unifrmy(miny, maxy);
 
   //generate 20 normally distributed floats  
-  for(int n=0 ;  n < 5 ;  n++) 
+  for(int n=0 ;  n < 10 ;  n++) 
    {
      X.push_back(normx(eng1));// set of x-coordinates for jewel
      Y.push_back(normy(eng1));//set of y-coordinates for jewel
